@@ -15,5 +15,6 @@ namespace RazorPagesApp.Data
         }
 
         public DbSet<RazorPagesApp.Models.TurmaModel> TurmaModel { get; set; } = default!;
+        public DbSet<RazorPagesApp.Models.InscricaoModel> InscricaoModel { get; set; } = default!;
     }
 }
