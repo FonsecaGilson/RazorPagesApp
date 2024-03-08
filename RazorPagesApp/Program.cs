@@ -28,6 +28,10 @@ builder.Services.AddRefitClient<ITurmaHttpClient>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri(config["ServicesUrls:TestApi"]))
     .AddHttpMessageHandler<AuthHeadersHandler>();
 
+builder.Services.AddRefitClient<IInscricaoHttpClient>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(config["ServicesUrls:TestApi"]))
+    .AddHttpMessageHandler<AuthHeadersHandler>();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
