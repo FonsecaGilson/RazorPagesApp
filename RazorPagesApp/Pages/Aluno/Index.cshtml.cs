@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Data;
 using RazorPagesApp.Data.Interface;
 using RazorPagesApp.Models;
 

@@ -1,5 +1,4 @@
-﻿using RazorPagesApp.Data.Interface;
-using RazorPagesApp.HttpClient.Interface;
+﻿using RazorPagesApp.HttpClient.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Data
@@ -25,17 +24,17 @@ namespace RazorPagesApp.Data
 
         public async Task Inativar(int id)
         {
-            await _inscricaoData.Inativar(id);  
+            await _inscricaoData.Inativar(id);
         }
 
         public Task<int> Inserir(InscricaoModel inscricao)
         {
-            return _inscricaoData.Inserir(inscricao);   
+            return _inscricaoData.Inserir(inscricao);
         }
 
         public async Task<IEnumerable<InscricaoModel>> Listar()
         {
-            return await _inscricaoData.Listar();   
+            return await _inscricaoData.Listar();
         }
     }
 }

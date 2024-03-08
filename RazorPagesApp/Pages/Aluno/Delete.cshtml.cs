@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesApp.Data;
 using RazorPagesApp.Data.Interface;
-using RazorPagesApp.HttpClient.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Pages_Aluno
