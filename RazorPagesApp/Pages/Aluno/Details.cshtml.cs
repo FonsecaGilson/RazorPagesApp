@@ -14,7 +14,7 @@ namespace RazorPagesApp.Pages_Aluno
             _alunoHttpClient = alunoHttpClient;
         }
 
-        public Aluno Aluno { get; set; } = default!;
+        public AlunoModel Aluno { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

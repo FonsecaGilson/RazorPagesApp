@@ -4,14 +4,14 @@ namespace RazorPagesApp.Data.Interface
 {
     public interface IAlunoData
     {
-        public Task<int> Inserir(Aluno aluno);
+        public Task<int> Inserir(AlunoModel aluno);
 
-        public Task Alterar(Aluno aluno);
+        public Task Alterar(AlunoModel aluno);
 
         public Task Excluir(int id);
 
-        public Task<Aluno> ConsultarPorId(int id);
+        public Task<AlunoModel> ConsultarPorId(int id);
 
-        public Task<IEnumerable<Aluno>> Listar();
+        public Task<IEnumerable<AlunoModel>> Listar();
     }
 }

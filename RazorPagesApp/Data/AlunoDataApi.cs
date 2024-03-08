@@ -12,12 +12,12 @@ namespace RazorPagesApp.Data
             _AlunoData = alunoData;
         }
 
-        public async Task<int> Inserir(Aluno aluno)
+        public async Task<int> Inserir(AlunoModel aluno)
         {
             return await _AlunoData.Inserir(aluno);
         }
 
-        public async Task Alterar(Aluno aluno)
+        public async Task Alterar(AlunoModel aluno)
         {
             await _AlunoData.Alterar(aluno);
         }
@@ -27,12 +27,12 @@ namespace RazorPagesApp.Data
             await _AlunoData.Excluir(id);
         }
 
-        public async Task<Aluno> ConsultarPorId(int id)
+        public async Task<AlunoModel> ConsultarPorId(int id)
         {
             return await _AlunoData.ConsultarPorId(id);
         }
 
-        public async Task<IEnumerable<Aluno>> Listar()
+        public async Task<IEnumerable<AlunoModel>> Listar()
         {
             return await _AlunoData.Listar();
         }

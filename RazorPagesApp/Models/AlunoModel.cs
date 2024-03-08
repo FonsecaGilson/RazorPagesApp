@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RazorPagesApp.Models
 {
-    public class Aluno
+    public class AlunoModel
     {
         [Key]
         [DisplayName("Id")]

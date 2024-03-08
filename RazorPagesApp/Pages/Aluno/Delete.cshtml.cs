@@ -15,7 +15,7 @@ namespace RazorPagesApp.Pages_Aluno
         }
 
         [BindProperty]
-        public Aluno Aluno { get; set; } = default!;
+        public AlunoModel Aluno { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
