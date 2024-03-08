@@ -1,17 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPagesApp.Data;
+using RazorPagesApp.Data.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Pages_Aluno
 {
     public class CreateModel : PageModel
     {
-        private readonly AlunoDataApi _alunoHttpClient;
+        private readonly IAlunoData _alunoData;
 
-        public CreateModel(AlunoDataApi alunoHttpClient)
+        public CreateModel(IAlunoData alunoData)
         {
-            _alunoHttpClient = alunoHttpClient;
+            _alunoData = alunoData;
         }
 
         public IActionResult OnGet()
@@ -29,7 +30,7 @@ namespace RazorPagesApp.Pages_Aluno
                 return Page();
             }
 
-            await _alunoHttpClient.Inserir(Aluno);
+            await _alunoData.Inserir(Aluno);
 
             return RedirectToPage("./Index");
         }

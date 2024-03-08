@@ -6,17 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesApp.Data;
+using RazorPagesApp.Data.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Pages_Turma
 {
     public class DeleteModel : PageModel
     {
-        private readonly RazorPagesApp.Data.RazorPagesAppContext _context;
+        private readonly ITurmaData _turmaData;
 
-        public DeleteModel(RazorPagesApp.Data.RazorPagesAppContext context)
+        public DeleteModel(ITurmaData turmaData)
         {
-            _context = context;
+            _turmaData = turmaData;
         }
 
         [BindProperty]
@@ -29,7 +30,7 @@ namespace RazorPagesApp.Pages_Turma
                 return NotFound();
             }
 
-            var turmamodel = await _context.TurmaModel.FirstOrDefaultAsync(m => m.Id == id);
+            var turmamodel = await _turmaData.ConsultarPorId(id.GetValueOrDefault());
 
             if (turmamodel == null)
             {
@@ -49,13 +50,7 @@ namespace RazorPagesApp.Pages_Turma
                 return NotFound();
             }
 
-            var turmamodel = await _context.TurmaModel.FindAsync(id);
-            if (turmamodel != null)
-            {
-                TurmaModel = turmamodel;
-                _context.TurmaModel.Remove(TurmaModel);
-                await _context.SaveChangesAsync();
-            }
+            await _turmaData.Inativar(id.GetValueOrDefault());
 
             return RedirectToPage("./Index");
         }

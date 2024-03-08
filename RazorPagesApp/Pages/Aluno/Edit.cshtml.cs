@@ -1,17 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPagesApp.Data;
+using RazorPagesApp.Data.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Pages_Aluno
 {
     public class EditModel : PageModel
     {
-        private readonly AlunoDataApi _alunoHttpClient;
+        private readonly IAlunoData _alunoData;
 
-        public EditModel(AlunoDataApi alunoHttpClient)
+        public EditModel(IAlunoData alunoData)
         {
-            _alunoHttpClient = alunoHttpClient;
+            _alunoData = alunoData;
         }
 
         [BindProperty]
@@ -24,7 +25,7 @@ namespace RazorPagesApp.Pages_Aluno
                 return NotFound();
             }
 
-            var aluno = await _alunoHttpClient.ConsultarPorId(id.GetValueOrDefault());
+            var aluno = await _alunoData.ConsultarPorId(id.GetValueOrDefault());
 
             if (aluno == null)
             {
@@ -43,7 +44,7 @@ namespace RazorPagesApp.Pages_Aluno
                 return Page();
             }
 
-            await _alunoHttpClient.Alterar(Aluno);
+            await _alunoData.Alterar(Aluno);
 
             return RedirectToPage("./Index");
         }

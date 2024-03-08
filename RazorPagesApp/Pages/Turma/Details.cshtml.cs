@@ -6,17 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesApp.Data;
+using RazorPagesApp.Data.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Pages_Turma
 {
     public class DetailsModel : PageModel
     {
-        private readonly RazorPagesApp.Data.RazorPagesAppContext _context;
+        private readonly ITurmaData _turmaData;
 
-        public DetailsModel(RazorPagesApp.Data.RazorPagesAppContext context)
+        public DetailsModel(ITurmaData turmaData)
         {
-            _context = context;
+            _turmaData = turmaData;
         }
 
         public TurmaModel TurmaModel { get; set; } = default!;
@@ -28,7 +29,8 @@ namespace RazorPagesApp.Pages_Turma
                 return NotFound();
             }
 
-            var turmamodel = await _context.TurmaModel.FirstOrDefaultAsync(m => m.Id == id);
+            var turmamodel = await _turmaData.ConsultarPorId(id.GetValueOrDefault());
+
             if (turmamodel == null)
             {
                 return NotFound();
@@ -37,6 +39,7 @@ namespace RazorPagesApp.Pages_Turma
             {
                 TurmaModel = turmamodel;
             }
+
             return Page();
         }
     }

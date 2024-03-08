@@ -7,17 +7,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesApp.Data;
+using RazorPagesApp.Data.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Pages_Turma
 {
     public class EditModel : PageModel
     {
-        private readonly RazorPagesApp.Data.RazorPagesAppContext _context;
+        private readonly ITurmaData _turmaData;
 
-        public EditModel(RazorPagesApp.Data.RazorPagesAppContext context)
+        public EditModel(ITurmaData turmaData)
         {
-            _context = context;
+            _turmaData = turmaData;
         }
 
         [BindProperty]
@@ -30,17 +31,18 @@ namespace RazorPagesApp.Pages_Turma
                 return NotFound();
             }
 
-            var turmamodel =  await _context.TurmaModel.FirstOrDefaultAsync(m => m.Id == id);
+            var turmamodel =  await _turmaData.ConsultarPorId(id.GetValueOrDefault());
+
             if (turmamodel == null)
             {
                 return NotFound();
             }
+
             TurmaModel = turmamodel;
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -48,30 +50,9 @@ namespace RazorPagesApp.Pages_Turma
                 return Page();
             }
 
-            _context.Attach(TurmaModel).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TurmaModelExists(TurmaModel.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _turmaData.Alterar(TurmaModel);
 
             return RedirectToPage("./Index");
-        }
-
-        private bool TurmaModelExists(int id)
-        {
-            return _context.TurmaModel.Any(e => e.Id == id);
         }
     }
 }

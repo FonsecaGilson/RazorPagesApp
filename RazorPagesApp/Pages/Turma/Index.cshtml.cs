@@ -6,24 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesApp.Data;
+using RazorPagesApp.Data.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Pages_Turma
 {
     public class IndexModel : PageModel
     {
-        private readonly RazorPagesApp.Data.RazorPagesAppContext _context;
+        private readonly ITurmaData _turmaData;
 
-        public IndexModel(RazorPagesApp.Data.RazorPagesAppContext context)
+        public IndexModel(ITurmaData turmaData)
         {
-            _context = context;
+            _turmaData = turmaData;
         }
 
         public IList<TurmaModel> TurmaModel { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            TurmaModel = await _context.TurmaModel.ToListAsync();
+            TurmaModel = (await _turmaData.Listar()).ToList();
         }
     }
 }

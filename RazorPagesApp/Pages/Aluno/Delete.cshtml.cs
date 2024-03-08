@@ -1,17 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPagesApp.Data;
+using RazorPagesApp.Data.Interface;
+using RazorPagesApp.HttpClient.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Pages_Aluno
 {
     public class DeleteModel : PageModel
     {
-        private readonly AlunoDataApi _alunoHttpClient;
+        private readonly IAlunoData _alunoData;
 
-        public DeleteModel(AlunoDataApi alunoHttpClient)
+        public DeleteModel(IAlunoData alunoData)
         {
-            _alunoHttpClient = alunoHttpClient;
+            _alunoData = alunoData;
         }
 
         [BindProperty]
@@ -24,7 +26,7 @@ namespace RazorPagesApp.Pages_Aluno
                 return NotFound();
             }
 
-            var aluno = await _alunoHttpClient.ConsultarPorId(id.GetValueOrDefault());
+            var aluno = await _alunoData.ConsultarPorId(id.GetValueOrDefault());
 
             if (aluno == null)
             {
@@ -44,7 +46,7 @@ namespace RazorPagesApp.Pages_Aluno
                 return NotFound();
             }
 
-            await _alunoHttpClient.Inativar(id.GetValueOrDefault());
+            await _alunoData.Inativar(id.GetValueOrDefault());
 
             return RedirectToPage("./Index");
         }

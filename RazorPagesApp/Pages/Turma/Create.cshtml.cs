@@ -6,17 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RazorPagesApp.Data;
+using RazorPagesApp.Data.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Pages_Turma
 {
     public class CreateModel : PageModel
     {
-        private readonly RazorPagesApp.Data.RazorPagesAppContext _context;
+        private readonly ITurmaData _turmaData;
 
-        public CreateModel(RazorPagesApp.Data.RazorPagesAppContext context)
+        public CreateModel(ITurmaData turmaData)
         {
-            _context = context;
+            _turmaData = turmaData;
         }
 
         public IActionResult OnGet()
@@ -27,7 +28,6 @@ namespace RazorPagesApp.Pages_Turma
         [BindProperty]
         public TurmaModel TurmaModel { get; set; } = default!;
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -35,8 +35,7 @@ namespace RazorPagesApp.Pages_Turma
                 return Page();
             }
 
-            _context.TurmaModel.Add(TurmaModel);
-            await _context.SaveChangesAsync();
+            await _turmaData.Inserir(TurmaModel);
 
             return RedirectToPage("./Index");
         }

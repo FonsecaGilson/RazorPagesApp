@@ -6,17 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RazorPagesApp.Data;
+using RazorPagesApp.Data.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Pages_Inscricao
 {
     public class CreateModel : PageModel
     {
-        private readonly RazorPagesApp.Data.RazorPagesAppContext _context;
+        private readonly IInscricaoData _inscricaoData;
 
-        public CreateModel(RazorPagesApp.Data.RazorPagesAppContext context)
+        public CreateModel(IInscricaoData inscricaoData)
         {
-            _context = context;
+            _inscricaoData = inscricaoData;
         }
 
         public IActionResult OnGet()
@@ -27,7 +28,6 @@ namespace RazorPagesApp.Pages_Inscricao
         [BindProperty]
         public InscricaoModel InscricaoModel { get; set; } = default!;
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -35,8 +35,7 @@ namespace RazorPagesApp.Pages_Inscricao
                 return Page();
             }
 
-            _context.InscricaoModel.Add(InscricaoModel);
-            await _context.SaveChangesAsync();
+            await _inscricaoData.Inserir(InscricaoModel);
 
             return RedirectToPage("./Index");
         }

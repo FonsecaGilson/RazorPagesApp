@@ -6,24 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesApp.Data;
+using RazorPagesApp.Data.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Pages_Inscricao
 {
     public class IndexModel : PageModel
     {
-        private readonly RazorPagesApp.Data.RazorPagesAppContext _context;
+        private readonly IInscricaoData _inscricaoData;
 
-        public IndexModel(RazorPagesApp.Data.RazorPagesAppContext context)
+        public IndexModel(IInscricaoData inscricaoData)
         {
-            _context = context;
+            _inscricaoData = inscricaoData;
         }
 
         public IList<InscricaoModel> InscricaoModel { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            InscricaoModel = await _context.InscricaoModel.ToListAsync();
+            InscricaoModel = (await _inscricaoData.Listar()).ToList();
         }
     }
 }

@@ -1,17 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPagesApp.Data;
+using RazorPagesApp.Data.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Pages_Aluno
 {
     public class DetailsModel : PageModel
     {
-        private readonly AlunoDataApi _alunoHttpClient;
+        private readonly IAlunoData _alunoData;
 
-        public DetailsModel(AlunoDataApi alunoHttpClient)
+        public DetailsModel(IAlunoData alunoData)
         {
-            _alunoHttpClient = alunoHttpClient;
+            _alunoData = alunoData;
         }
 
         public AlunoModel Aluno { get; set; } = default!;
@@ -23,7 +24,7 @@ namespace RazorPagesApp.Pages_Aluno
                 return NotFound();
             }
 
-            var aluno = await _alunoHttpClient.ConsultarPorId(id.GetValueOrDefault());
+            var aluno = await _alunoData.ConsultarPorId(id.GetValueOrDefault());
 
             if (aluno == null)
             {

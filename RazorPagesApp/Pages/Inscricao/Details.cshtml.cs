@@ -6,17 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesApp.Data;
+using RazorPagesApp.Data.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Pages_Inscricao
 {
     public class DetailsModel : PageModel
     {
-        private readonly RazorPagesApp.Data.RazorPagesAppContext _context;
+        private readonly IInscricaoData _inscricaoData;
 
-        public DetailsModel(RazorPagesApp.Data.RazorPagesAppContext context)
+        public DetailsModel(IInscricaoData inscricaoData)
         {
-            _context = context;
+            _inscricaoData = inscricaoData;
         }
 
         public InscricaoModel InscricaoModel { get; set; } = default!;
@@ -28,7 +29,8 @@ namespace RazorPagesApp.Pages_Inscricao
                 return NotFound();
             }
 
-            var inscricaomodel = await _context.InscricaoModel.FirstOrDefaultAsync(m => m.Id == id);
+            var inscricaomodel = await _inscricaoData.ConsultarPorId(id.GetValueOrDefault());
+            
             if (inscricaomodel == null)
             {
                 return NotFound();
