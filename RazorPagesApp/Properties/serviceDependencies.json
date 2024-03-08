@@ -3,6 +3,10 @@
     "mssql1": {
       "type": "mssql",
       "connectionId": "ConnectionStrings:TestRazorContext"
+    },
+    "mssql2": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:RazorPagesAppContext"
     }
   }
 }

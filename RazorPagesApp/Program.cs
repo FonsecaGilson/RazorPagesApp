@@ -2,12 +2,16 @@
 using RazorPagesApp.HttpClient;
 using RazorPagesApp.HttpClient.Interface;
 using Refit;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var config = builder.Configuration;
 
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<RazorPagesAppContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("RazorPagesAppContext") ?? throw new InvalidOperationException("Connection string 'RazorPagesAppContext' not found.")));
 builder.Services.AddTransient<AuthHeadersHandler>();
 builder.Services.AddTransient<AlunoDataApi>();
 builder.Services.AddTransient<TurmaDataApi>();
