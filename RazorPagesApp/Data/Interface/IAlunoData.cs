@@ -8,7 +8,7 @@ namespace RazorPagesApp.Data.Interface
 
         public Task Alterar(AlunoModel aluno);
 
-        public Task Excluir(int id);
+        public Task Inativar(int id);
 
         public Task<AlunoModel> ConsultarPorId(int id);
 

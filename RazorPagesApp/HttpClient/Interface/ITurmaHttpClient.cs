@@ -1,22 +1,23 @@
-﻿using Refit;
+﻿using RazorPagesApp.Models;
+using Refit;
 
 namespace RazorPagesApp.HttpClient.Interface
 {
     public interface ITurmaHttpClient
     {
         [Post("/Inserir")]
-        Task<object> Inserir(object turma);
+        Task<int> Inserir(TurmaModel turma);
 
         [Put("/Alterar")]
-        Task<object> Alterar(object turma);
+        Task Alterar(TurmaModel turma);
 
-        [Delete("/Excluir")]
-        Task<object> Excluir(object turma);
+        [Delete("/Inativar")]
+        Task Inativar(int id);
 
         [Get("/ConsultarPorId")]
-        Task<object> ConsultarPorId(object turma);
+        Task<TurmaModel> ConsultarPorId(int id);
 
         [Get("/Listar")]
-        Task<object> Listar(object turma);
+        Task<IEnumerable<TurmaModel>> Listar();
     }
 }

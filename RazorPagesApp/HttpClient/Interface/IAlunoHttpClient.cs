@@ -11,8 +11,8 @@ namespace RazorPagesApp.HttpClient.Interface
         [Put("/Alterar")]
         Task Alterar(AlunoModel aluno);
 
-        [Delete("/Excluir")]
-        Task Excluir(int id);
+        [Delete("/Inativar")]
+        Task Inativar(int id);
 
         [Get("/ConsultarPorId")]
         Task<AlunoModel> ConsultarPorId(int id);

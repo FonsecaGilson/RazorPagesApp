@@ -1,39 +1,40 @@
 ﻿using RazorPagesApp.HttpClient.Interface;
+using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Data
 {
     public class TurmaDataApi : Interface.ITurmaData
     {
-        private readonly ITurmaHttpClient _TurmaData;
+        private readonly ITurmaHttpClient _turmaData;
 
         public TurmaDataApi(ITurmaHttpClient turmaData)
         {
-            _TurmaData = turmaData;
+            _turmaData = turmaData;
         }
 
-        public async Task<object> Inserir(object turma)
+        public async Task<int> Inserir(TurmaModel turma)
         {
-            return await _TurmaData.Inserir(turma);
+            return await _turmaData.Inserir(turma);
         }
 
-        public async Task<object> Alterar(object turma)
+        public async Task Alterar(TurmaModel turma)
         {
-            return await _TurmaData.Alterar(turma);
+            await _turmaData.Alterar(turma);
         }
 
-        public async Task<object> Excluir(object turma)
+        public async Task Inativar(int id)
         {
-            return await _TurmaData.Excluir(turma);
+            await _turmaData.Inativar(id);
         }
 
-        public async Task<object> ConsultarPorId(object turma)
+        public async Task<TurmaModel> ConsultarPorId(int id)
         {
-            return await _TurmaData.ConsultarPorId(turma);
+            return await _turmaData.ConsultarPorId(id);
         }
 
-        public async Task<object> Listar(object turma)
+        public async Task<IEnumerable<TurmaModel>> Listar()
         {
-            return await _TurmaData.Listar(turma);
+            return await _turmaData.Listar();
         }
     }
 }

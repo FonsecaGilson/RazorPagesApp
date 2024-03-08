@@ -1,15 +1,17 @@
-﻿namespace RazorPagesApp.Data.Interface
+﻿using RazorPagesApp.Models;
+
+namespace RazorPagesApp.Data.Interface
 {
     public interface ITurmaData
     {
-        public Task<object> Inserir(object turma);
+        public Task<int> Inserir(TurmaModel turma);
 
-        public Task<object> Alterar(object turma);
+        public Task Alterar(TurmaModel turma);
 
-        public Task<object> Excluir(object turma);
+        public Task Inativar(int id);
 
-        public Task<object> ConsultarPorId(object turma);
+        public Task<TurmaModel> ConsultarPorId(int id);
 
-        public Task<object> Listar(object turma);
+        public Task<IEnumerable<TurmaModel>> Listar();
     }
 }

@@ -44,7 +44,7 @@ namespace RazorPagesApp.Pages_Aluno
                 return NotFound();
             }
 
-            await _alunoHttpClient.Excluir(id.GetValueOrDefault());
+            await _alunoHttpClient.Inativar(id.GetValueOrDefault());
 
             return RedirectToPage("./Index");
         }

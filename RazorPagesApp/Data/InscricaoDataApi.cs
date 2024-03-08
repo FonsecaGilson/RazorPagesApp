@@ -1,34 +1,41 @@
-﻿using RazorPagesApp.HttpClient.Interface;
+﻿using RazorPagesApp.Data.Interface;
+using RazorPagesApp.HttpClient.Interface;
 using RazorPagesApp.Models;
 
 namespace RazorPagesApp.Data
 {
     public class InscricaoDataApi : Interface.IInscricaoData
     {
+        private readonly IInscricaoHttpClient _inscricaoData;
 
-        public Task Alterar(InscricaoModel inscricao)
+        public InscricaoDataApi(IInscricaoHttpClient inscricaoData)
         {
-            throw new NotImplementedException();
+            _inscricaoData = inscricaoData;
         }
 
-        public Task<InscricaoModel> ConsultarPorId(int id)
+        public async Task Alterar(InscricaoModel inscricao)
         {
-            throw new NotImplementedException();
+            await _inscricaoData.Alterar(inscricao);
         }
 
-        public Task Inativar(int id)
+        public async Task<InscricaoModel> ConsultarPorId(int id)
         {
-            throw new NotImplementedException();
+            return await _inscricaoData.ConsultarPorId(id);
+        }
+
+        public async Task Inativar(int id)
+        {
+            await _inscricaoData.Inativar(id);  
         }
 
         public Task<int> Inserir(InscricaoModel inscricao)
         {
-            throw new NotImplementedException();
+            return _inscricaoData.Inserir(inscricao);   
         }
 
-        public Task<IEnumerable<InscricaoModel>> Listar()
+        public async Task<IEnumerable<InscricaoModel>> Listar()
         {
-            throw new NotImplementedException();
+            return await _inscricaoData.Listar();   
         }
     }
 }
