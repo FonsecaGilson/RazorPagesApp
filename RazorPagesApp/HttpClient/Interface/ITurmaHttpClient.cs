@@ -11,10 +11,10 @@ namespace RazorPagesApp.HttpClient.Interface
         [Put("/Alterar")]
         Task Alterar(TurmaModel turma);
 
-        [Delete("/Inativar")]
+        [Delete("/Inativar/{id}")]
         Task Inativar(int id);
 
-        [Get("/ConsultarPorId")]
+        [Get("/ConsultarPorId/{id}")]
         Task<TurmaModel> ConsultarPorId(int id);
 
         [Get("/Listar")]

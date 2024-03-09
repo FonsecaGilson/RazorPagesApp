@@ -1,4 +1,5 @@
-﻿using RazorPagesApp.Data;
+﻿using RazorPagesApp.Common.Middleware;
+using RazorPagesApp.Data;
 using RazorPagesApp.Data.Interface;
 using RazorPagesApp.HttpClient;
 using RazorPagesApp.HttpClient.Interface;
@@ -17,15 +18,15 @@ builder.Services.AddTransient<IInscricaoData, InscricaoDataApi>();
 builder.Services.AddTransient<AuthHeadersHandler>();
 
 builder.Services.AddRefitClient<IAlunoHttpClient>()
-    .ConfigureHttpClient(c => c.BaseAddress = new Uri(config["ServicesUrls:TestApi"]))
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(config["ServicesUrls:Aluno"]))
     .AddHttpMessageHandler<AuthHeadersHandler>();
 
 builder.Services.AddRefitClient<ITurmaHttpClient>()
-    .ConfigureHttpClient(c => c.BaseAddress = new Uri(config["ServicesUrls:TestApi"]))
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(config["ServicesUrls:Turma"]))
     .AddHttpMessageHandler<AuthHeadersHandler>();
 
 builder.Services.AddRefitClient<IInscricaoHttpClient>()
-    .ConfigureHttpClient(c => c.BaseAddress = new Uri(config["ServicesUrls:TestApi"]))
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(config["ServicesUrls:Inscricao"]))
     .AddHttpMessageHandler<AuthHeadersHandler>();
 
 var app = builder.Build();
@@ -36,6 +37,8 @@ if (!app.Environment.IsDevelopment())
 
     app.UseHsts();
 }
+
+app.UseApiErrorHandlingMiddleware();
 
 app.UseHttpsRedirection();
 

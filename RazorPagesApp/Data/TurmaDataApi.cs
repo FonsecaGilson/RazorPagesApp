@@ -14,27 +14,62 @@ namespace RazorPagesApp.Data
 
         public async Task<int> Inserir(TurmaModel turma)
         {
-            return await _turmaData.Inserir(turma);
+            try
+            {
+                return await _turmaData.Inserir(turma);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public async Task Alterar(TurmaModel turma)
         {
-            await _turmaData.Alterar(turma);
+            try
+            {
+                await _turmaData.Alterar(turma);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public async Task Inativar(int id)
         {
-            await _turmaData.Inativar(id);
+            try
+            {
+                await _turmaData.Inativar(id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public async Task<TurmaModel> ConsultarPorId(int id)
         {
-            return await _turmaData.ConsultarPorId(id);
+            try
+            {
+                return await _turmaData.ConsultarPorId(id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public async Task<IEnumerable<TurmaModel>> Listar()
         {
-            return await _turmaData.Listar();
+            try
+            {
+                return await _turmaData.Listar();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }
