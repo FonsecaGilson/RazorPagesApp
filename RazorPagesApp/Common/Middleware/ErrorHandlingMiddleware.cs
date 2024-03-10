@@ -1,11 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System;
-using System.Net;
-using System.Threading.Tasks;
-
-namespace RazorPagesApp.Common.Middleware
+﻿namespace RazorPagesApp.Common.Middleware
 {
     public class ErrorHandlingMiddleware
     {

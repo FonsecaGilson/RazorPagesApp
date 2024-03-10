@@ -14,26 +14,12 @@ namespace RazorPagesApp.Data
 
         public async Task<int> Inserir(AlunoModel aluno)
         {
-            try
-            {
-                return await _alunoData.Inserir(aluno);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            return await _alunoData.Inserir(aluno);
         }
 
         public async Task Alterar(AlunoModel aluno)
         {
-            try
-            {
-                await _alunoData.Alterar(aluno);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            await _alunoData.Alterar(aluno);
         }
 
         public async Task Inativar(int id)
@@ -48,15 +34,7 @@ namespace RazorPagesApp.Data
 
         public async Task<IEnumerable<AlunoModel>> Listar()
         {
-            try
-            {
-                return await _alunoData.Listar();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+            return await _alunoData.Listar();
         }
     }
 }
